@@ -21,7 +21,7 @@ useEffect(()=>{
 
 console.log(onlineUsers);
 
-if (isCheckingAuth && authUser) return (
+if (isCheckingAuth && !authUser) return (
   <div className="flex items-center justify-center h-screen bg-black">
     <Loader className="size-10 animate-spin"/>
   </div>
@@ -32,12 +32,12 @@ if (isCheckingAuth && authUser) return (
     <>
     <Toast/>
         <Routes>
-          <Route path="/" element={!authUser ? <Home /> : <Navigate to="/auth"/>} />
-          <Route path="/msg/:id" element={!authUser ? <Message /> : <Navigate to="/auth"/>} />
+          <Route path="/" element={authUser ? <Home /> : <Navigate to="/auth"/>} />
+          <Route path="/msg/:id" element={authUser ? <Message /> : <Navigate to="/auth"/>} />
           <Route path="/auth" element={!authUser ? <Auth /> : <Navigate to="/"/>} />
-          <Route path="/story" element={!authUser ? <StoryView /> : <Navigate to="/auth"/>} />
-          <Route path="/ai" element={!authUser ? <AI /> : <Navigate to="/auth"/>} />
-          <Route path="/Image" element={!authUser ? <ImageShare /> : <Navigate to="/auth"/>} />
+          <Route path="/story" element={authUser ? <StoryView /> : <Navigate to="/auth"/>} />
+          <Route path="/ai" element={authUser ? <AI /> : <Navigate to="/auth"/>} />
+          <Route path="/Image" element={authUser ? <ImageShare /> : <Navigate to="/auth"/>} />
         </Routes>
     </>
   )
